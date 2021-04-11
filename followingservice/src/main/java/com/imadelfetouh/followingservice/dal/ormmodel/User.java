@@ -8,6 +8,16 @@ import java.util.List;
 @Table(name = "user")
 public class User implements Serializable {
 
+    public User() {
+
+    }
+
+    public User(String userId, String username, String userphoto) {
+        this.userId = userId;
+        this.username = username;
+        this.userphoto = userphoto;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
