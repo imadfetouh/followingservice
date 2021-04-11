@@ -10,9 +10,11 @@ import com.imadelfetouh.followingservice.model.response.ResponseType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
 
+@ActiveProfiles("test")
 public class FollowingDalDBTest {
 
     @BeforeAll
