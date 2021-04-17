@@ -6,14 +6,16 @@ public class UserData implements Serializable {
 
     private String userId;
     private String username;
+    private String role;
 
     public UserData() {
 
     }
 
-    public UserData(String userId, String username) {
+    public UserData(String userId, String username, String role) {
         this.userId = userId;
         this.username = username;
+        this.role = role;
     }
 
     public void setUserId(String userId) {
@@ -30,5 +32,13 @@ public class UserData implements Serializable {
 
     public String getUsername() {
         return username;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getRole() {
+        return role;
     }
 }
