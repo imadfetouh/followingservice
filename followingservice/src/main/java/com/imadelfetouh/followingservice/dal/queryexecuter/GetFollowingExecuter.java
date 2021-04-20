@@ -21,7 +21,7 @@ public class GetFollowingExecuter implements QueryExecuter<List<FollowingDTO>> {
     public ResponseModel<List<FollowingDTO>> executeQuery(Session session) {
         ResponseModel<List<FollowingDTO>> responseModel = new ResponseModel<>();
 
-        Query query = session.createQuery("SELECT new com.imadelfetouh.followingservice.model.dto.FollowingDTO(f.userFollowing.userId, f.userFollowing.username, f.userFollowing.userphoto) FROM Following f WHERE f.user.userId = :userId");
+        Query query = session.createQuery("SELECT new com.imadelfetouh.followingservice.model.dto.FollowingDTO(f.userFollowing.userId, f.userFollowing.username, f.userFollowing.photo) FROM Following f WHERE f.user.userId = :userId");
         query.setParameter("userId", userId);
         List<FollowingDTO> followingDTOS = query.getResultList();
 

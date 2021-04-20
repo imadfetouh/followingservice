@@ -12,10 +12,10 @@ public class User implements Serializable {
 
     }
 
-    public User(String userId, String username, String userphoto) {
+    public User(String userId, String username, String photo) {
         this.userId = userId;
         this.username = username;
-        this.userphoto = userphoto;
+        this.photo = photo;
     }
 
     @Id
@@ -30,10 +30,10 @@ public class User implements Serializable {
     private String username;
 
     @Column(name = "userphoto")
-    private String userphoto;
+    private String photo;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "userId")
     private List<Following> followings;
 
     public String getUserId() {
@@ -44,8 +44,8 @@ public class User implements Serializable {
         return username;
     }
 
-    public String getUserphoto() {
-        return userphoto;
+    public String getPhoto() {
+        return photo;
     }
 
     public List<Following> getFollowings() {
