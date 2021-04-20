@@ -36,6 +36,10 @@ public class User implements Serializable {
     @JoinColumn(name = "user_id", referencedColumnName = "userId")
     private List<Following> followings;
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "following_id", referencedColumnName = "userId")
+    private List<Following> followers;
+
     public String getUserId() {
         return userId;
     }
