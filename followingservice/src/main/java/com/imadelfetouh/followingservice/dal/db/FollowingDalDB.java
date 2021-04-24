@@ -7,7 +7,11 @@ import com.imadelfetouh.followingservice.dal.queryexecuter.GetFollowingExecuter;
 import com.imadelfetouh.followingservice.dal.queryexecuter.UnfollowExecuter;
 import com.imadelfetouh.followingservice.dalinterface.FollowingDal;
 import com.imadelfetouh.followingservice.model.dto.FollowingDTO;
+import com.imadelfetouh.followingservice.model.dto.NewFollowingDTO;
 import com.imadelfetouh.followingservice.model.response.ResponseModel;
+import com.imadelfetouh.followingservice.model.response.ResponseType;
+import com.imadelfetouh.followingservice.rabbit.RabbitProducer;
+import com.imadelfetouh.followingservice.rabbit.producer.AddFollowingProducer;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -24,7 +28,15 @@ public class FollowingDalDB implements FollowingDal {
     @Override
     public ResponseModel<Void> addFollowing(String userId, String followingId) {
         Executer<Void> executer = new Executer<>(SessionType.WRITE);
-        return executer.execute(new AddFollowingExecuter(userId, followingId));
+        ResponseModel<Void> responseModel = executer.execute(new AddFollowingExecuter(userId, followingId));
+
+        if(responseModel.getResponseType().equals(ResponseType.CORRECT)) {
+            NewFollowingDTO newFollowingDTO = new NewFollowingDTO(userId, followingId);
+            RabbitProducer rabbitProducer = new RabbitProducer();
+            rabbitProducer.produce(new AddFollowingProducer(newFollowingDTO));
+        }
+
+        return responseModel;
     }
 
     @Override

@@ -3,7 +3,6 @@ package com.imadelfetouh.followingservice.rabbit.delivercallback;
 import com.imadelfetouh.followingservice.dal.configuration.Executer;
 import com.imadelfetouh.followingservice.dal.configuration.SessionType;
 import com.imadelfetouh.followingservice.dal.queryexecuter.DeleteUserExecuter;
-import com.imadelfetouh.followingservice.rabbit.RabbitProps;
 import com.rabbitmq.client.DeliverCallback;
 import com.rabbitmq.client.Delivery;
 
