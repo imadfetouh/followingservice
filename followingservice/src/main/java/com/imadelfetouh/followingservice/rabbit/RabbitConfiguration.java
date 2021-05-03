@@ -35,9 +35,10 @@ public class RabbitConfiguration {
             try {
                 count++;
                 connection = connectionFactory.newConnection();
+                logger.info("Connected with rabbit");
                 return connection;
             } catch (IOException | TimeoutException e) {
-                logger.log(Level.ALL, e.getMessage());
+                logger.severe(e.getMessage());
                 if(count == maxCount){
                     return null;
                 }

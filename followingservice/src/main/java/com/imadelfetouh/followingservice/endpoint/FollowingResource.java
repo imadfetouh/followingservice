@@ -6,21 +6,27 @@ import com.imadelfetouh.followingservice.model.dto.FollowingDTO;
 import com.imadelfetouh.followingservice.model.jwt.UserData;
 import com.imadelfetouh.followingservice.model.response.ResponseModel;
 import com.imadelfetouh.followingservice.model.response.ResponseType;
+import org.apache.juli.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("following")
 public class FollowingResource {
+
+    private static final Logger logger = Logger.getLogger(FollowingResource.class.getName());
 
     @Autowired
     private FollowingDal followingDal;
 
     @GetMapping(value = "/{userId}",  produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<FollowingDTO>> getFollowingUsers(@PathVariable("userId") String userId) {
+
+        logger.info("get followers request made for userId: " + userId);
 
         ResponseModel<List<FollowingDTO>> responseModel = followingDal.getFollowingUsers(userId);
 
@@ -36,6 +42,8 @@ public class FollowingResource {
 
     @PostMapping("/{followingId}")
     public ResponseEntity<Void> addFollowing(@RequestAttribute("userdata") String userDataString, @PathVariable("followingId") String followingId) {
+        logger.info("Add following request made with followingId: " + followingId);
+
         Gson gson = new Gson();
         UserData userData = gson.fromJson(userDataString, UserData.class);
 
@@ -50,6 +58,8 @@ public class FollowingResource {
 
     @DeleteMapping("/{followingId}")
     public ResponseEntity<Void> unfollow(@RequestAttribute("userdata") String userDataString, @PathVariable("followingId") String followingId) {
+        logger.info("Unfollow request made with followingId: " + followingId);
+
         Gson gson = new Gson();
         UserData userData = gson.fromJson(userDataString, UserData.class);
 

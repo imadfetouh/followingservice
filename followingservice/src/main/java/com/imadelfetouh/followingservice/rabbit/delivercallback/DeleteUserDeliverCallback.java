@@ -17,13 +17,14 @@ public class DeleteUserDeliverCallback implements DeliverCallback {
     @Override
     public void handle(String s, Delivery delivery) {
         try {
+            logger.info("Message received delete user");
             String userId = new String(delivery.getBody(), StandardCharsets.UTF_8);
 
             Executer<Void> executer = new Executer<>(SessionType.WRITE);
             executer.execute(new DeleteUserExecuter(userId));
         }
         catch (Exception e) {
-            logger.log(Level.ALL, e.getMessage());
+            logger.severe(e.getMessage());
         }
     }
 }

@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: followingservice-deployment
+  labels:
+    app: followingservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: followingservice
+  template:
+    metadata:
+      labels:
+        app: followingservice
+    spec:
+      containers:
+        - name: followingservice
+          imagePullPolicy: Always
+          image: imadelfetouh99/followingservice:latest
+          ports:
+            - containerPort: 8083
+          env:
+            - name: FOLLOWINGSERVICE_MYSQL_MASTER_HOST
+              value: mysql-followingservice-master-service
+            - name: FOLLOWINGSERVICE_MYSQL_REPLICA_HOST
+              value: mysql-followingservice-master-service
+            - name: FOLLOWINGSERVICE_MYSQL_MASTER_PORT
+              value: '3312'
+            - name: FOLLOWINGSERVICE_MYSQL_REPLICA_PORT
+              value: '3312'
+            - name: MYSQL_USER
+              value: root
+            - name: MYSQL_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: mysql
+                  key: password
+            - name: RABBIT_HOST
+              value: rabbit-service
+            - name: secretkey
+              value: secretkeyforkwetterimadinjwt@semester6
+          resources:
+            limits:
+              memory: 256Mi
+              cpu: 100m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: followingservice-service
+spec:
+  selector:
+    app: followingservice
+  ports:
+    - port: 8083
+      targetPort: 8083

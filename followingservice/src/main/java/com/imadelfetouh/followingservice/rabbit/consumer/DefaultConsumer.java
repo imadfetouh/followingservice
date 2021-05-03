@@ -35,7 +35,7 @@ public class DefaultConsumer implements NonStopConsumer {
             monitor.start();
         }
         catch (Exception e) {
-            logger.log(Level.ALL, e.getMessage());
+            logger.severe(e.getMessage());
         }
     }
 }

@@ -29,9 +29,11 @@ public class AddFollowingProducer implements Producer {
             String json = gson.toJson(newFollowingDTO);
 
             channel.basicPublish(exchange_name, "", null, json.getBytes());
+
+            logger.info("Message add following send");
         }
         catch (Exception e) {
-            logger.log(Level.ALL, e.getMessage());
+            logger.severe(e.getMessage());
         }
     }
 }
