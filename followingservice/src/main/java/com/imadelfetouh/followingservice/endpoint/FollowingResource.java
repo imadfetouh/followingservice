@@ -23,12 +23,29 @@ public class FollowingResource {
     @Autowired
     private FollowingDal followingDal;
 
-    @GetMapping(value = "/{userId}",  produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/followings/{userId}",  produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<FollowingDTO>> getFollowingUsers(@PathVariable("userId") String userId) {
+
+        logger.info("get followings request made for userId: " + userId);
+
+        ResponseModel<List<FollowingDTO>> responseModel = followingDal.getFollowingUsers(userId);
+
+        if(responseModel.getResponseType().equals(ResponseType.EMPTY)) {
+            return ResponseEntity.noContent().build();
+        }
+        else if(responseModel.getResponseType().equals(ResponseType.CORRECT)) {
+            return ResponseEntity.ok().body(responseModel.getData());
+        }
+
+        return ResponseEntity.status(500).build();
+    }
+
+    @GetMapping(value = "/followers/{userId}",  produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<FollowingDTO>> getFollowers(@PathVariable("userId") String userId) {
 
         logger.info("get followers request made for userId: " + userId);
 
-        ResponseModel<List<FollowingDTO>> responseModel = followingDal.getFollowingUsers(userId);
+        ResponseModel<List<FollowingDTO>> responseModel = followingDal.getFollowers(userId);
 
         if(responseModel.getResponseType().equals(ResponseType.EMPTY)) {
             return ResponseEntity.noContent().build();
