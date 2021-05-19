@@ -18,7 +18,7 @@ public class CreateJWTToken {
     }
 
     public static CreateJWTToken getInstance(){
-        return (createToken == null) ? new CreateJWTToken() : createToken;
+        return createToken;
     }
 
     public String create(Map<String, String> claims){

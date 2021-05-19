@@ -26,7 +26,7 @@ import java.util.Map;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class FollowingRabbitTest {
 
-    String getJWT() {
+    static String getJWT() {
         Gson gson = new Gson();
         UserData userData = new UserData("u123", "imad", "USER");;
         Map<String, String> claims = new HashMap<>();
@@ -35,7 +35,7 @@ public class FollowingRabbitTest {
     }
 
     ResponseEntity<String> getFollowersRequest() {
-        String jwtToken = getJWT();
+        String jwtToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyZGF0YSI6IntcInVzZXJJZFwiOlwidTEyM1wiLFwidXNlcm5hbWVcIjpcImltYWRcIixcInJvbGVcIjpcIlVTRVJcIn0iLCJpc3MiOiJLd2V0dGVyaW1hZCIsImlhdCI6MTYyMTQ0NDUzOCwiZXhwIjoxNjIxNDQ4MTM4fQ.9JzLxYxKjnzZJmUeawkbqPTiCsiMFgj7da5zV3k3R2A";
         String url = "http://localhost:8089/profile/u1234";
 
         RestTemplate restTemplate = new RestTemplate();
