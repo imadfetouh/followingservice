@@ -1,6 +1,6 @@
 version: '3.3'
 services:
-  followingservice-mysql:
+  mysql:
     image: mysql
     container_name: mysql
     restart: always
@@ -8,3 +8,27 @@ services:
       - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: imad
+
+  rabbit:
+    image: rabbitmq:3.8-management
+    container_name: rabbit
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  profileservice:
+    image: imadelfetouh99/profileservice:latest
+    container_name: profileservice
+    restart: always
+    ports:
+      - "8084:8084"
+    environment:
+      PROFILESERVICE_MYSQL_MASTER_HOST: mysql
+      PROFILESERVICE_MYSQL_REPLICA_HOST: mysql
+      PROFILESERVICE_MYSQL_MASTER_PORT: 3306
+      PROFILESERVICE_MYSQL_REPLICA_PORT: 3306
+      MYSQL_USER: root
+      MYSQL_PASS: imad
+      RABBIT_HOST: rabbit
+      secretkey: secretkeyforkwetterimadinjwt@semester6

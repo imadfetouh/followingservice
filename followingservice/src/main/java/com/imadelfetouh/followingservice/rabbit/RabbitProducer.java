@@ -1,6 +1,5 @@
 package com.imadelfetouh.followingservice.rabbit;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class RabbitProducer extends ChannelHelper {

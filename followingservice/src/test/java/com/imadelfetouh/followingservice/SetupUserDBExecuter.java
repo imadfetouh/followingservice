@@ -1,4 +1,4 @@
-package com.imadelfetouh.followingservice.setup;
+package com.imadelfetouh.followingservice;
 
 import com.imadelfetouh.followingservice.dal.configuration.QueryExecuter;
 import com.imadelfetouh.followingservice.dal.ormmodel.Following;

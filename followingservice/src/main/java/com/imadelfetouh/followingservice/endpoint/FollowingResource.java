@@ -6,7 +6,6 @@ import com.imadelfetouh.followingservice.model.dto.FollowingDTO;
 import com.imadelfetouh.followingservice.model.jwt.UserData;
 import com.imadelfetouh.followingservice.model.response.ResponseModel;
 import com.imadelfetouh.followingservice.model.response.ResponseType;
-import org.apache.juli.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
