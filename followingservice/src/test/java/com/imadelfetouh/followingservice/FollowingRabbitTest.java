@@ -34,9 +34,8 @@ public class FollowingRabbitTest {
         return CreateJWTToken.getInstance().create(claims);
     }
 
-    ResponseEntity<String> getFollowersRequest() {
+    ResponseEntity<String> getFollowersRequest(String url) {
         String jwtToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyZGF0YSI6IntcInVzZXJJZFwiOlwidTEyM1wiLFwidXNlcm5hbWVcIjpcImltYWRcIixcInJvbGVcIjpcIlVTRVJcIn0iLCJpc3MiOiJLd2V0dGVyaW1hZCIsImlhdCI6MTYyMTQ0NDUzOCwiZXhwIjoxNjIxNDQ4MTM4fQ.9JzLxYxKjnzZJmUeawkbqPTiCsiMFgj7da5zV3k3R2A";
-        String url = "http://localhost:8089/profile/u1234";
 
         RestTemplate restTemplate = new RestTemplate();
 
@@ -79,8 +78,9 @@ public class FollowingRabbitTest {
     @Order(1)
     void getFollowersFromProfileServiceEmptyList() {
         Gson gson = new Gson();
+        String url = "http://localhost:8089/profile/u1234";
 
-        ResponseEntity<String> responseEntity = getFollowersRequest();
+        ResponseEntity<String> responseEntity = getFollowersRequest(url);
 
         Assertions.assertEquals(200, responseEntity.getStatusCode().value());
 
@@ -104,17 +104,33 @@ public class FollowingRabbitTest {
     @Order(3)
     void getFollowersFromProfileServiceNonEmptyList() throws InterruptedException {
         Gson gson = new Gson();
+        String url = "http://localhost:8089/profile/u1234";
 
-        ResponseEntity<String> responseEntity = getFollowersRequest();
+        ResponseEntity<String> responseEntity = getFollowersRequest(url);
 
         Assertions.assertEquals(200, responseEntity.getStatusCode().value());
 
         Thread.sleep(2000);
 
         JsonObject jsonObject = gson.fromJson(responseEntity.getBody(), JsonObject.class);
-        System.out.println(responseEntity.getBody());
         Long followers = jsonObject.get("followers").getAsLong();
 
         Assertions.assertEquals(1, followers);
+    }
+
+    @Test
+    @Order(4)
+    void getTestUserFollowBoolean() {
+        Gson gson = new Gson();
+        String url = "http://localhost:8089/profile/u123";
+
+        ResponseEntity<String> responseEntity = getFollowersRequest(url);
+
+        Assertions.assertEquals(200, responseEntity.getStatusCode().value());
+
+        JsonObject jsonObject = gson.fromJson(responseEntity.getBody(), JsonObject.class);
+        Boolean follow = jsonObject.get("follow").getAsBoolean();
+
+        Assertions.assertTrue(follow);
     }
 }
