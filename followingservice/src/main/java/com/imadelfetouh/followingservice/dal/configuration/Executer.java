@@ -2,6 +2,7 @@ package com.imadelfetouh.followingservice.dal.configuration;
 
 import com.imadelfetouh.followingservice.model.response.ResponseModel;
 import com.imadelfetouh.followingservice.model.response.ResponseType;
+
 import java.util.logging.Logger;
 
 public class Executer<T> extends SessionHelper{

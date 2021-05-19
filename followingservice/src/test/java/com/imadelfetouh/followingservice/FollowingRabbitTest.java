@@ -2,6 +2,7 @@ package com.imadelfetouh.followingservice;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.imadelfetouh.followingservice.dal.configuration.Executer;
 import com.imadelfetouh.followingservice.dal.configuration.SessionType;
 import com.imadelfetouh.followingservice.dal.db.FollowingDalDB;
 import com.imadelfetouh.followingservice.dal.queryexecuter.SetupDatabase;
