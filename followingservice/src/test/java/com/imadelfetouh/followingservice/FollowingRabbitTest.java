@@ -35,7 +35,7 @@ public class FollowingRabbitTest {
 
     ResponseEntity<String> getFollowersRequest() {
         String jwtToken = getJWT();
-        String url = "http://localhost:8084/profile/u1234";
+        String url = "http://localhost:8089/profile/u1234";
 
         RestTemplate restTemplate = new RestTemplate();
 

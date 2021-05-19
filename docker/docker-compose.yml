@@ -22,7 +22,7 @@ services:
     container_name: profileservice
     restart: always
     ports:
-      - "8084:8084"
+      - "8089:8084"
     environment:
       PROFILESERVICE_MYSQL_MASTER_HOST: mysql
       PROFILESERVICE_MYSQL_REPLICA_HOST: mysql
