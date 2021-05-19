@@ -9,6 +9,7 @@ variables:
   MYSQL_USER: root
   MYSQL_PASS: imad
   RABBIT_HOST: localhost
+  secretkey: secretkeyforkwetterimadinjwt@semester6
 
 pool:
   vmImage: ubuntu-latest
