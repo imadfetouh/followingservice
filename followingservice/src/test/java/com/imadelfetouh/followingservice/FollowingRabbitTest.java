@@ -112,6 +112,7 @@ public class FollowingRabbitTest {
         Thread.sleep(2000);
 
         JsonObject jsonObject = gson.fromJson(responseEntity.getBody(), JsonObject.class);
+        System.out.println(responseEntity.getBody());
         Long followers = jsonObject.get("followers").getAsLong();
 
         Assertions.assertEquals(1, followers);
