@@ -102,12 +102,14 @@ public class FollowingRabbitTest {
 
     @Test
     @Order(3)
-    void getFollowersFromProfileServiceNonEmptyList() {
+    void getFollowersFromProfileServiceNonEmptyList() throws InterruptedException {
         Gson gson = new Gson();
 
         ResponseEntity<String> responseEntity = getFollowersRequest();
 
         Assertions.assertEquals(200, responseEntity.getStatusCode().value());
+
+        Thread.sleep(2000);
 
         JsonObject jsonObject = gson.fromJson(responseEntity.getBody(), JsonObject.class);
         Integer followers = jsonObject.get("followers").getAsInt();
