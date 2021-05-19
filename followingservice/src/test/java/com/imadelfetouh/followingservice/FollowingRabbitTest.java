@@ -127,8 +127,9 @@ public class FollowingRabbitTest {
 
         Assertions.assertEquals(200, responseEntity.getStatusCode().value());
 
+        System.out.println(responseEntity.getBody());
         JsonObject jsonObject = gson.fromJson(responseEntity.getBody(), JsonObject.class);
-        Integer follow = jsonObject.get("follow").getAsInt();
+        Long follow = jsonObject.get("follow").getAsLong();
 
         Assertions.assertNotNull(follow);
     }
