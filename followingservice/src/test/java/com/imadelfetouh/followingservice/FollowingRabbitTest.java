@@ -85,7 +85,7 @@ public class FollowingRabbitTest {
         Assertions.assertEquals(200, responseEntity.getStatusCode().value());
 
         JsonObject jsonObject = gson.fromJson(responseEntity.getBody(), JsonObject.class);
-        Integer followers = jsonObject.get("followers").getAsInt();
+        Long followers = jsonObject.get("followers").getAsLong();
 
         Assertions.assertEquals(0, followers);
     }
@@ -112,7 +112,7 @@ public class FollowingRabbitTest {
         Thread.sleep(2000);
 
         JsonObject jsonObject = gson.fromJson(responseEntity.getBody(), JsonObject.class);
-        Integer followers = jsonObject.get("followers").getAsInt();
+        Long followers = jsonObject.get("followers").getAsLong();
 
         Assertions.assertEquals(1, followers);
     }
