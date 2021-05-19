@@ -103,14 +103,13 @@ public class FollowingRabbitTest {
     @Test
     @Order(3)
     void getFollowersFromProfileServiceNonEmptyList() throws InterruptedException {
+        Thread.sleep(3000);
         Gson gson = new Gson();
         String url = "http://localhost:8089/profile/u1234";
 
         ResponseEntity<String> responseEntity = getFollowersRequest(url);
 
         Assertions.assertEquals(200, responseEntity.getStatusCode().value());
-
-        Thread.sleep(2000);
 
         JsonObject jsonObject = gson.fromJson(responseEntity.getBody(), JsonObject.class);
         System.out.println(jsonObject);
@@ -130,7 +129,7 @@ public class FollowingRabbitTest {
         Assertions.assertEquals(200, responseEntity.getStatusCode().value());
 
         JsonObject jsonObject = gson.fromJson(responseEntity.getBody(), JsonObject.class);
-        Boolean follow = jsonObject.get("follow").getAsBoolean();
+        boolean follow = jsonObject.get("follow").getAsBoolean();
 
         Assertions.assertTrue(follow);
     }
