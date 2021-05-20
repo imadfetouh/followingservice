@@ -149,6 +149,6 @@ public class FollowingRabbitTest {
 
         JsonObject jsonObject = gson.fromJson(responseEntity.getBody(), JsonObject.class);
 
-        Assertions.assertNull(jsonObject.get("follow"));
+        Assertions.assertNull(String.valueOf(jsonObject.get("follow")));
     }
 }
