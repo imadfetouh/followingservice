@@ -34,8 +34,12 @@ public class FollowingRabbitTest {
         return CreateJWTToken.getInstance().create(claims);
     }
 
+    public static void main(String[] args) {
+        System.out.println(getJWT());
+    }
+
     ResponseEntity<String> getFollowersRequest(String url) {
-        String jwtToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyZGF0YSI6IntcInVzZXJJZFwiOlwidTEyM1wiLFwidXNlcm5hbWVcIjpcImltYWRcIixcInJvbGVcIjpcIlVTRVJcIn0iLCJpc3MiOiJLd2V0dGVyaW1hZCIsImlhdCI6MTYyMTQ0NDUzOCwiZXhwIjoxNjIxNDQ4MTM4fQ.9JzLxYxKjnzZJmUeawkbqPTiCsiMFgj7da5zV3k3R2A";
+        String jwtToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyZGF0YSI6IntcInVzZXJJZFwiOlwidTEyM1wiLFwidXNlcm5hbWVcIjpcImltYWRcIixcInJvbGVcIjpcIlVTRVJcIn0iLCJpc3MiOiJLd2V0dGVyaW1hZCIsImlhdCI6MTYyMTQ5NDU5MywiZXhwIjoxNjIxNDk4MTkzfQ.CKD6rSX6Z-Ks79xdvgI4bnNxg1Wygn6lOEsU4VeHgMk";
 
         RestTemplate restTemplate = new RestTemplate();
 
