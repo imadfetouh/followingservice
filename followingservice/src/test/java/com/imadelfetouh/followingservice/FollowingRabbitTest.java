@@ -125,7 +125,7 @@ public class FollowingRabbitTest {
     @Order(4)
     void getTestUserFollowBoolean() {
         Gson gson = new Gson();
-        String url = "http://localhost:8089/profile/u123";
+        String url = "http://localhost:8089/profile/u1234";
 
         ResponseEntity<String> responseEntity = getFollowersRequest(url);
 
