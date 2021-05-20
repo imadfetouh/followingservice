@@ -2,10 +2,7 @@ package com.imadelfetouh.followingservice.dal.db;
 
 import com.imadelfetouh.followingservice.dal.configuration.Executer;
 import com.imadelfetouh.followingservice.dal.configuration.SessionType;
-import com.imadelfetouh.followingservice.dal.queryexecuter.AddFollowingExecuter;
-import com.imadelfetouh.followingservice.dal.queryexecuter.GetFollowersExecuter;
-import com.imadelfetouh.followingservice.dal.queryexecuter.GetFollowingExecuter;
-import com.imadelfetouh.followingservice.dal.queryexecuter.UnfollowExecuter;
+import com.imadelfetouh.followingservice.dal.queryexecuter.*;
 import com.imadelfetouh.followingservice.dalinterface.FollowingDal;
 import com.imadelfetouh.followingservice.model.dto.FollowingDTO;
 import com.imadelfetouh.followingservice.model.dto.NewFollowingDTO;
@@ -21,15 +18,9 @@ import java.util.List;
 public class FollowingDalDB implements FollowingDal {
 
     @Override
-    public ResponseModel<List<FollowingDTO>> getFollowingUsers(String userId) {
+    public ResponseModel<List<FollowingDTO>> getFollowers(String userId, FType fType) {
         Executer<List<FollowingDTO>> executer = new Executer<>(SessionType.READ);
-        return executer.execute(new GetFollowingExecuter(userId));
-    }
-
-    @Override
-    public ResponseModel<List<FollowingDTO>> getFollowers(String userId) {
-        Executer<List<FollowingDTO>> executer = new Executer<>(SessionType.READ);
-        return executer.execute(new GetFollowersExecuter(userId));
+        return executer.execute(new GetFollowersExecuter(userId, fType));
     }
 
     @Override

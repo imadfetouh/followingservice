@@ -12,16 +12,25 @@ import java.util.List;
 public class GetFollowersExecuter implements QueryExecuter<List<FollowingDTO>> {
 
     private String userId;
+    private FType fType;
 
-    public GetFollowersExecuter(String userId) {
+    public GetFollowersExecuter(String userId, FType fType) {
         this.userId = userId;
+        this.fType = fType;
     }
 
     @Override
     public ResponseModel<List<FollowingDTO>> executeQuery(Session session) {
         ResponseModel<List<FollowingDTO>> responseModel = new ResponseModel<>();
 
-        Query query = session.createQuery("SELECT new com.imadelfetouh.followingservice.model.dto.FollowingDTO(f.user.userId, f.user.username, f.user.photo) FROM Following f WHERE f.userFollowing.userId = :userId");
+        Query query = null;
+        if(fType.equals(FType.FOLLOWERS)) {
+            query = session.createQuery("SELECT new com.imadelfetouh.followingservice.model.dto.FollowingDTO(f.user.userId, f.user.username, f.user.photo) FROM Following f WHERE f.userFollowing.userId = :userId");
+        }
+        else {
+            query = session.createQuery("SELECT new com.imadelfetouh.followingservice.model.dto.FollowingDTO(f.userFollowing.userId, f.userFollowing.username, f.userFollowing.photo) FROM Following f WHERE f.user.userId = :userId");
+        }
+
         query.setParameter("userId", userId);
         List<FollowingDTO> followingDTOS = query.getResultList();
 

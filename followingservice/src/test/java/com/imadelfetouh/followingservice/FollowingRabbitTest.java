@@ -123,7 +123,7 @@ public class FollowingRabbitTest {
 
     @Test
     @Order(4)
-    void getTestUserFollowBoolean() {
+    void getTestUserFollowBooleanNonNull() {
         Gson gson = new Gson();
         String url = "http://localhost:8089/profile/u1234";
 
@@ -131,10 +131,24 @@ public class FollowingRabbitTest {
 
         Assertions.assertEquals(200, responseEntity.getStatusCode().value());
 
-        System.out.println(responseEntity.getBody());
         JsonObject jsonObject = gson.fromJson(responseEntity.getBody(), JsonObject.class);
         Long follow = jsonObject.get("follow").getAsLong();
 
         Assertions.assertNotNull(follow);
+    }
+
+    @Test
+    @Order(5)
+    void getTestUserFollowBooleanNull() {
+        Gson gson = new Gson();
+        String url = "http://localhost:8089/profile/u123";
+
+        ResponseEntity<String> responseEntity = getFollowersRequest(url);
+
+        Assertions.assertEquals(200, responseEntity.getStatusCode().value());
+
+        JsonObject jsonObject = gson.fromJson(responseEntity.getBody(), JsonObject.class);
+
+        Assertions.assertNull(jsonObject.get("follow"));
     }
 }
