@@ -26,7 +26,7 @@ import java.util.Map;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class FollowingRabbitTest {
 
-    static String getJWT() {
+    String getJWT() {
         Gson gson = new Gson();
         UserData userData = new UserData("u123", "imad", "USER");;
         Map<String, String> claims = new HashMap<>();
@@ -34,12 +34,8 @@ public class FollowingRabbitTest {
         return CreateJWTToken.getInstance().create(claims);
     }
 
-    public static void main(String[] args) {
-        System.out.println(getJWT());
-    }
-
     ResponseEntity<String> getFollowersRequest(String url) {
-        String jwtToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyZGF0YSI6IntcInVzZXJJZFwiOlwidTEyM1wiLFwidXNlcm5hbWVcIjpcImltYWRcIixcInJvbGVcIjpcIlVTRVJcIn0iLCJpc3MiOiJLd2V0dGVyaW1hZCIsImlhdCI6MTYyMTQ5NDU5MywiZXhwIjoxNjIxNDk4MTkzfQ.CKD6rSX6Z-Ks79xdvgI4bnNxg1Wygn6lOEsU4VeHgMk";
+        String jwtToken = getJWT();
 
         RestTemplate restTemplate = new RestTemplate();
 
@@ -135,20 +131,5 @@ public class FollowingRabbitTest {
         Long follow = jsonObject.get("follow").getAsLong();
 
         Assertions.assertNotNull(follow);
-    }
-
-    @Test
-    @Order(5)
-    void getTestUserFollowBooleanNull() {
-        Gson gson = new Gson();
-        String url = "http://localhost:8089/profile/u123";
-
-        ResponseEntity<String> responseEntity = getFollowersRequest(url);
-
-        Assertions.assertEquals(200, responseEntity.getStatusCode().value());
-
-        JsonObject jsonObject = gson.fromJson(responseEntity.getBody(), JsonObject.class);
-
-        Assertions.assertNull(String.valueOf(jsonObject.get("follow")));
     }
 }
