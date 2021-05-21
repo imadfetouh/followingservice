@@ -32,12 +32,17 @@ public class CookieFilter implements Filter {
             }
             else{
                 String userData = ValidateJWTToken.getInstance().getUserData(cookie.getValue());
+                if(userData == null) {
+                    httpServletResponse.setStatus(401);
+                    return;
+                }
 
                 if(RabbitConfiguration.getInstance().getConnection() == null && !httpServletRequest.getMethod().equals("GET")) {
                     logger.info("Request made, but rabbit is down");
                     httpServletResponse.setStatus(503);
                     return;
                 }
+
                 httpServletRequest.setAttribute("userdata", userData);
                 filterChain.doFilter(httpServletRequest, httpServletResponse);
                 return;
