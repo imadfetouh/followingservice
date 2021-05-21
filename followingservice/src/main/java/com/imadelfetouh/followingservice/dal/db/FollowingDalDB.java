@@ -4,7 +4,7 @@ import com.imadelfetouh.followingservice.dal.configuration.Executer;
 import com.imadelfetouh.followingservice.dal.configuration.SessionType;
 import com.imadelfetouh.followingservice.dal.queryexecuter.*;
 import com.imadelfetouh.followingservice.dalinterface.FollowingDal;
-import com.imadelfetouh.followingservice.model.dto.FollowingDTO;
+import com.imadelfetouh.followingservice.model.dto.UserDTO;
 import com.imadelfetouh.followingservice.model.dto.NewFollowingDTO;
 import com.imadelfetouh.followingservice.model.response.ResponseModel;
 import com.imadelfetouh.followingservice.model.response.ResponseType;
@@ -18,8 +18,8 @@ import java.util.List;
 public class FollowingDalDB implements FollowingDal {
 
     @Override
-    public ResponseModel<List<FollowingDTO>> getFollowers(String userId, FType fType) {
-        Executer<List<FollowingDTO>> executer = new Executer<>(SessionType.READ);
+    public ResponseModel<List<UserDTO>> getFollowers(String userId, FType fType) {
+        Executer<List<UserDTO>> executer = new Executer<>(SessionType.READ);
         return executer.execute(new GetFollowersExecuter(userId, fType));
     }
 

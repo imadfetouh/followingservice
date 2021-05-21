@@ -1,14 +1,12 @@
 package com.imadelfetouh.followingservice.model.dto;
 
-import java.io.Serializable;
-
-public class NewUserDTO implements Serializable {
+public class UserDTO {
 
     private String userId;
     private String username;
     private String photo;
 
-    public NewUserDTO(String userId, String username, String photo) {
+    public UserDTO(String userId, String username, String photo) {
         this.userId = userId;
         this.username = username;
         this.photo = photo;

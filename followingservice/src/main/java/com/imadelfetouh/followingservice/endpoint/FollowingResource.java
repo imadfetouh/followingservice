@@ -3,7 +3,7 @@ package com.imadelfetouh.followingservice.endpoint;
 import com.google.gson.Gson;
 import com.imadelfetouh.followingservice.dal.queryexecuter.FType;
 import com.imadelfetouh.followingservice.dalinterface.FollowingDal;
-import com.imadelfetouh.followingservice.model.dto.FollowingDTO;
+import com.imadelfetouh.followingservice.model.dto.UserDTO;
 import com.imadelfetouh.followingservice.model.jwt.UserData;
 import com.imadelfetouh.followingservice.model.response.ResponseModel;
 import com.imadelfetouh.followingservice.model.response.ResponseType;
@@ -24,11 +24,11 @@ public class FollowingResource {
     private FollowingDal followingDal;
 
     @GetMapping(value = "/followings/{userId}",  produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<FollowingDTO>> getFollowingUsers(@PathVariable("userId") String userId) {
+    public ResponseEntity<List<UserDTO>> getFollowingUsers(@PathVariable("userId") String userId) {
 
         logger.info("get followings request made");
 
-        ResponseModel<List<FollowingDTO>> responseModel = followingDal.getFollowers(userId, FType.FOLLOWINGS);
+        ResponseModel<List<UserDTO>> responseModel = followingDal.getFollowers(userId, FType.FOLLOWINGS);
 
         if(responseModel.getResponseType().equals(ResponseType.EMPTY)) {
             return ResponseEntity.noContent().build();
@@ -41,11 +41,11 @@ public class FollowingResource {
     }
 
     @GetMapping(value = "/followers/{userId}",  produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<FollowingDTO>> getFollowers(@PathVariable("userId") String userId) {
+    public ResponseEntity<List<UserDTO>> getFollowers(@PathVariable("userId") String userId) {
 
         logger.info("get followers request made");
 
-        ResponseModel<List<FollowingDTO>> responseModel = followingDal.getFollowers(userId, FType.FOLLOWERS);
+        ResponseModel<List<UserDTO>> responseModel = followingDal.getFollowers(userId, FType.FOLLOWERS);
 
         if(responseModel.getResponseType().equals(ResponseType.EMPTY)) {
             return ResponseEntity.noContent().build();
