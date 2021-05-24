@@ -37,7 +37,7 @@ public class CookieFilter implements Filter {
                     return;
                 }
 
-                if(RabbitConfiguration.getInstance().getConnection() == null && !httpServletRequest.getMethod().equals("GET")) {
+                if(!RabbitConfiguration.getInstance().getConnection().isOpen() && !httpServletRequest.getMethod().equals("GET")) {
                     logger.info("Request made, but rabbit is down");
                     httpServletResponse.setStatus(503);
                     return;
